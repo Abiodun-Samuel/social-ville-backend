@@ -19,13 +19,16 @@ app.get("/", (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 mongoose
-  .connect(process.env.CONNECTION_URL, {
+  .connect(process.env.CONNECTION_URL_LOCAL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     //  useFindAndModify: false,
   })
   .then(() =>
-    app.listen(PORT, () => console.log(`server is runnning on Port: ${PORT}`))
+    app.listen(PORT, () => {
+      console.log(`server is runnning on Port: ${PORT}`);
+      console.log("mongodb connected");
+    })
   )
   .catch((error) => console.log(error.message));
 // mongoose.set("useFindAndModify", false);
